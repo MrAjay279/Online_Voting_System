@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #a8a8a8;
+        }
+        .header {
+            background-color: #f89040;
+            color: #ffffff;
+            padding: 25px;
+            text-align: center;
+            font-weight: bold;
+            font: italic;
+        }
+
+        .header{
+            background: url('img1.jpg') currentColor 45% 60%/cover;
+            font-size: larger;
+            font: weight 2px;
+            background-size: 1000px;
+            font-style: underline;
+            text-shadow: #000000;
+            box-shadow: #000000;
+        }
+      
+        .header h1 {
+            font-size: 3em;
+            font-family: "Times New Roman"; 
+            font-variant:normal; 
+            font-weight: bold; 
+            color:#000000;
+            text-shadow: 2px 2px white;
+        
+         }    
+      
+        .sidebar {
+            height: 100%;
+            width: 230px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #4e4e4e;
+            padding-top: 10px;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #ffffff;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        .main {
+            margin-left: 300px; /* Same as the width of the sidebar */
+            padding: 20px;
+        }
+        .container, .container2{
+            display: none; /* Hide all containers by default */
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        .container {
+            background-color: #b0b6f0;
+            background: url('some.webp');
+        }
+        
+        .container2 {
+            background-color: #dae0b5;
+            background: url('fan.jpg');
+        }
+        
+        .container h2, .container2 h2{
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 2%; 
+            background-color: #000000;
+            color: white;
+        }
+        label {
+            color: white;
+        }
+       
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 99%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group button {
+            width: 50%;
+            padding: 10px;
+            height: 43px;
+            background-color: #64eda8;
+            color: #fff;
+            border: #000000;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: large;
+            font-style: underline;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            display: block;
+            margin: auto;
+        }
+        .form-group button:hover {
+            background-color: #18ffbe;
+        }
+        .notification {
+            display: none;
+            padding: 10px;
+            margin-top: 20px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .notification.success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .notification.error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        .navbar-links .logout {
+            color: #f40e0e;
+            text-decoration: underline;
+        }
+        .admindash h2 {
+            text-align: center;
+            margin-bottom:20px;
+            margin-top: 0px;
+            padding: 1%;
+            background-color: rgb(224, 222, 222);
+            color: rgb(0, 0, 0);
+        }
+        .navbar {
+            background-color: #000000;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+      
+          .navbar-logo {
+            font-size: 24px;
+            font-weight: bold;
+          }
+      
+          .navbar-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            font-size: 22px;
+          }
+      
+          .navbar-links li {
+            margin-right: 20px;
+          }
+      
+          .navbar-links li a {
+            color: #fff;
+            text-decoration: none;
+          }
+          a:link, li a:link{
+            color: white;
+          }
+
+          a:hover, li a:hover{
+            color: #2386f0;
+          }
+          a:active, li a:active{
+            color: #3cb458;
+          }
+          .container .form-group button:active{
+            color: darkblue;
+          }
+
+          .container2 .form-group button:active{
+            color: darkblue;
+          }
+
+
+          .sidebar a:hover{
+            background-color: #000000;
+          }
+
+          .student-item {
+                color: white;
+          }
+
+          .faculty-item {
+            color: white;
+          }
+
+          
+        footer {
+            background-color: #000000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><u>Online Voting Services</u></h1>
+    </div>
+    <header class="navbar">
+        <div class="navbar-logo">Voting Services</div>
+        <nav>
+          <ul class="navbar-links">
+            <li><a href="#"id="home1">Home</a></li>
+            <li><a href="#" id="removeVoterBtn1">Remove Voter</a></li>
+            <li><a href="#" id="managesBtn1">Manage Voters</a></li>
+            <li><a href="/" class="logout"><i style="font-size:20px" class="fa">&#xf08b;Logout</i></a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="admindash">
+        <h2><marquee width="100%" behavior="alternate" scrollamount="12"><i style="font-size:24px" class="fa">&#xf007;</i> Admin Dashboard</marquee></h2>
+    </div>
+    
+    <div class="sidebar">
+        <a herf="#" id="home"><i style="font-size:24px" class="fa">&#xf015;</i> Home</a>
+        <a href="#" id="removeVoterBtn">1. <i style="font-size:18px" class="fa">&#xf235;</i> Remove Voter</a>
+        <a href="#" id="managesBtn">2. <i style="font-size:18px" class="fa">&#xf0c0;</i> Manage Voters</a>
+    </div>
+    <div class="main">
+        <div class="container2">
+            <h2>Remove Voter</h2>
+            <form id="removeVoterForm">
+                <div class="form-group">
+                    <label for="stid">ID:</label>
+                    <input type="text" id="stid" name="stid" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Remove Voter</button>
+                </div>
+            </form>
+            <div class="notification" id="removeVoterNotification"></div>
+        </div>
+
+        <!-- Display existing voters -->
+        <div class="container" id="managesContainer">
+            <h2>Manage Voters</h2>
+            <div class="form-group">
+                <button id="displayVotersButton">Display Voters</button>
+            </div>
+            <div id="voterList"></div>
+        </div>
+
+        <div class="Home">
+            <h2>Welcome to Online Voting Services Website!!!</h2>
+            <form id="home">
+                <div class="form-group"></div>
+                </div>
+            </form>
+            <div class="notification" id="removeVoterNotification"></div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2025 Online Voting Services. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Add any necessary JavaScript code, such as AJAX requests -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function showNotification(notificationId, message, isSuccess) {
+                const notification = $(notificationId);
+                notification.text(message);
+                notification.removeClass('success error');
+                notification.addClass(isSuccess ? 'success' : 'error');
+                notification.show();
+                setTimeout(() => notification.hide(), 3000);
+            }
+
+            function clearForm(formId) {
+                $(formId).trigger("reset");
+            }
+
+            $('#removeVoterForm').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.post('/admin/removeVoter', formData, function(response) {
+                    clearForm('#removeVoterForm');
+                    showNotification('#removeVoterNotification', 'Voter removed successfully!', true);
+                }).fail(function(xhr) {
+                    showNotification('#removeVoterNotification', 'Error removing voter: ' + xhr.responseText, false);
+                });
+            });
+
+            function loadVoters() {
+                $.get('/admin/voters', function(data) {
+                    let voterHtml = '';
+                    data.forEach(voter => {
+                        voterHtml += `
+                            <div class="voter-item">
+                                <p>Epic ID: ${voter.epic_id}</p>
+                                <p>Name: ${voter.name}</p>
+                                <p>DOB: ${voter.dob}</p>
+                                <p>Aadhaar: ${voter.aadhaar}</p>
+                                <p>Constituency Name: ${voter.constituency_name}</p>
+                                <p>Voted: ${voter.voted}</p>
+                                <p>Password: ${voter.password}</p>
+                            </div>
+                            <hr>`;
+                    });
+                    $('#voterList').html(voterHtml);
+                });
+            }
+
+
+            // Sidebar navigation
+            $('#removeVoterBtn').click(function() {
+                $('.container, .container1, .container2, .container3, .container5,.container7, .Home').hide();
+                $('.container2').show();
+            });
+
+            $('#managesBtn').click(function() {
+                $('.container, .container1, .container2, .container3, .container5,.container7, .Home').hide();
+                $('#managesContainer').show();
+            });
+
+            $('#managesBtn1').click(function() {
+                $('.container, .container1, .container2, .container3, .container5,.container7, .Home').hide();
+                $('#managesContainer').show();
+            });
+        
+            $('#home').click(function() {
+                $('.container, .container1, .container2, .container3, .container5, .container7').hide();
+                $('.Home').show();
+            });
+
+            $('#removeVoterBtn1').click(function() {
+                $('.container, .container1, .container2, .container3, .container5,.container7, .Home').hide();
+                $('.container2').show();
+            });
+
+            $('#home1').click(function() {
+                $('.container, .container1, .container2, .container3, .container5, .container7').hide();
+                $('.Home').show();
+            });
+
+            // Load voters on button click
+            $('#displayVotersButton').click(function() {
+                if ($('#voterList').is(':visible')) {
+                    $('#voterList').hide();
+                } else {
+                    loadVoters();
+                    $('#voterList').show();
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>

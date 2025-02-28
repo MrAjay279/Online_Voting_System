@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #a8a8a8;
+        }
+        .header {
+            background-color: #f89040;
+            color: #ffffff;
+            padding: 25px;
+            text-align: center;
+            font-weight: bold;
+            font: italic;
+        }
+        .header {
+            background: url('img1.jpg') currentColor 45% 60%/cover;
+            font-size: larger;
+            font-style: underline;
+            text-shadow: #000000;
+            box-shadow: #000000;
+        }
+        .header h1 {
+            font-size: 3em;
+            font-family: "Times New Roman"; 
+            font-weight: bold; 
+            color: #000000;
+            text-shadow: 2px 2px white;
+        }
+        .navbar {
+            background-color: #000000;
+            color: #fff;
+            padding: 20px 20px;
+            display: flex;
+            align-items: center;
+        }
+        main {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .form-group input[type="radio"] {
+            margin-right: 10px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #6495ed;
+            color: #fff;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #4169e1;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        select:focus {
+            border-color: #4169e1;
+            outline: none;
+        }
+        
+
+        footer {
+            background-color: #000000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><u>Online Voting Results</u></h1>
+    </div>
+    <header class="navbar">
+        <a href="/" style="color: #fff; text-decoration: none; font-size: 24px;"><i class="fa fa-arrow-left"></i> Back</a>
+    </header>
+    <main>
+        <h2>Check Results</h2>
+        <p>Select a constituency to view the voting results:</p>
+        <form action="/admin/fetch_results" method="POST">
+            <div class="form-group">
+                <label for="constituency_name">Constituency Name</label>
+                <select name="constituency_name" id="constituency_name" required>
+                    <option value="" disabled selected>Select Constituency</option>
+                    <option value="Constituency A">Constituency A</option>
+                    <option value="Constituency B">Constituency B</option>
+                    <option value="Constituency C">Constituency C</option>
+                    <option value="Constituency D">Constituency D</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit"><i class="fa fa-bar-chart"></i> View Results</button>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 Online Voting Services. All rights reserved.</p>
+    </footer>
+</body>
+</html>

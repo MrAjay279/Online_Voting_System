@@ -1,0 +1,177 @@
+<!-- admin_login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Times New Roman', Times, serif;
+        background-color: #a8a8a8;
+    }
+
+    .header {
+      background-color: #f89040;
+      color: #ffffff;
+      padding: 25px;
+      text-align: center;
+      font-weight: bold;
+  }
+    
+    .header{
+      background: url('img1.jpg') currentColor 45% 60%/cover;
+      font-size: larger;
+      font: weight 2px;
+      background-size: 1000px;
+      font-style: underline;
+      text-shadow: #000000;
+      box-shadow: #000000;
+  }
+
+  .header h1 {
+      font-size: 3em;
+      font-family: "Times New Roman"; 
+      font-variant:normal; 
+      font-weight: bold; 
+      color:#000000;
+      text-shadow: 2px 2px white;
+  
+   }    
+
+      .login h2 {
+        text-align: center;
+        margin-bottom:10px;
+        margin-top: 10px;
+        padding: 1%;
+        background-color: rgb(224, 222, 222);
+        color: rgb(0, 0, 0);
+      }
+      .login .logout {
+        position: left;
+        right: 400px;
+        display: flex;
+        top: 0px;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: larger;
+    }
+        .container {
+          max-width: 800px;
+          background: url('img1.jpg');
+          margin: 50px auto;
+          padding: 20px;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+    
+        .container h2 {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+    
+        .form-group {
+          margin-bottom: 20px;
+      
+        }
+    
+        .form-group label {
+          display: block;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+    
+        .form-group input {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+    
+        .form-group button {
+          width: 100%;
+          padding: 10px;
+          background-color: #6495ed;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+    
+        .form-group button:hover {
+          background-color: #4169e1;
+        }
+        .navbar {
+          background-color: #000000;
+          color: #fff;
+          padding: 50px 20px;
+          display: flex;
+          align-items: center;
+        }
+
+        .navbar {
+          background-color: black;
+          padding: 25px;
+          margin-bottom: -35px;
+          font-size: large;
+        }
+
+        .login a:link{
+          color:rgb(255, 255, 255);
+        }
+        
+
+        footer {
+          background-color: #000000;
+          color: #fff;
+          padding: 20px;
+          text-align: center;
+          position: fixed;
+          width: 100%;
+          bottom: 0;
+      }
+      footer p {
+          margin: 0;
+      }
+      </style>
+</head>
+<body>
+  <div class="header">
+    <h1><u>Online Voting Services</u></h1>
+</div>
+<header class="navbar">
+</header>
+    <div class = "login">
+        <a href="/" class="logout"><i style="font-size:24px" class="fa">&#xf060; Back</i></a>
+        <h2><marquee width="100%" behavior="alternate" scrollamount="12"><i style="font-size:24px" class="fa">&#xf007; User Login Page</marquee></h2>
+    </div>
+
+    <div class="container">
+        <h2>User Login</h2>
+        <form action="/auth/user/login" method="post">
+            <div class="form-group">
+                <label for="username">Epic Id</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+              <button type="submit">Login</button>
+          </div>
+          <div class="form-group" style="text-align: center; margin-top: 10px;">
+              <p>New User? <a href="/user/user_register.html">Register Here</a></p>
+          </div>
+        </form>
+    </div>
+    <footer>
+      <p>&copy; 2025 Online Voting Services. All rights reserved.</p>
+  </footer>
+</body>
+</html>

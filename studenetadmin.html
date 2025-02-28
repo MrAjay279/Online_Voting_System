@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #a8a8a8;
+        }
+        .header {
+            background-color: #f89040;
+            color: #ffffff;
+            padding: 30px;
+            text-align: center;
+            font-weight: bold;
+            font: italic;
+        }
+
+        .header{
+            background: url('img1.jpg') currentColor 45% 60%/cover;
+            font-size: larger;
+            font: weight 2px;
+            background-size: 1000px;
+            font-style: underline;
+            text-shadow: #000000;
+            box-shadow: #000000;
+        }
+      
+        .header h1 {
+            font-size: 4em;
+            font-family: "Brush Script MT", cursive; 
+            font-style:italic; 
+            font-variant:normal; 
+            font-weight: 5; 
+            color:#000000;
+            text-shadow: 5px 5px white;
+        
+         }    
+      
+        .sidebar {
+            height: 100%;
+            width: 230px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #4e4e4e;
+            padding-top: 10px;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #ffffff;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        .main {
+            margin-left: 300px; /* Same as the width of the sidebar */
+            padding: 20px;
+        }
+        .container, .container1, .container2, .container3, .container5, .container7{
+            display: none; /* Hide all containers by default */
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        .container {
+            background-color: #b0b6f0;
+            background: url('some.webp');
+        }
+        .container1 {
+            background-color: #98b6e0;
+            background: url('img1.jpg');
+        }
+        .container2 {
+            background-color: #dae0b5;
+            background: url('fan.jpg');
+        }
+        .container3 {
+            background-color: #fba8a8;
+            background: url('sam2.jpg');
+        }
+        .container5{
+            background-color: #fba8a8;
+            background: url('img3.jpg');
+        }
+        .container7{
+            background-color: #9cf1fa;
+            background: url('some2.jpg');
+        }
+        .container h2, .container1 h2, .container2 h2, .container3 h2 ,.container5 h2, .container7 h2{
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 2%; 
+            background-color: #000000;
+            color: white;
+        }
+        label {
+            color: white;
+        }
+       
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 99%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group button {
+            width: 50%;
+            padding: 10px;
+            height: 43px;
+            background-color: #64eda8;
+            color: #fff;
+            border: #000000;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: large;
+            font-style: underline;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            display: block;
+            margin: auto;
+        }
+        .form-group button:hover {
+            background-color: #18ffbe;
+        }
+        .notification {
+            display: none;
+            padding: 10px;
+            margin-top: 20px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .notification.success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .notification.error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        .navbar-links .logout {
+            color: #f40e0e;
+            text-decoration: underline;
+        }
+        .admindash h2 {
+            text-align: center;
+            margin-bottom:20px;
+            margin-top: 0px;
+            padding: 1%;
+            background-color: rgb(224, 222, 222);
+            color: rgb(0, 0, 0);
+        }
+        .navbar {
+            background-color: #000000;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+      
+          .navbar-logo {
+            font-size: 24px;
+            font-weight: bold;
+          }
+      
+          .navbar-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            font-size: 22px;
+          }
+      
+          .navbar-links li {
+            margin-right: 20px;
+          }
+      
+          .navbar-links li a {
+            color: #fff;
+            text-decoration: none;
+          }
+          a:link, li a:link{
+            color: white;
+          }
+
+          a:hover, li a:hover{
+            color: #2386f0;
+          }
+          a:active, li a:active{
+            color: #3cb458;
+          }
+          .container .form-group button:active{
+            color: darkblue;
+          }
+
+          .container1 .form-group button:active{
+            color: darkblue;
+          }
+
+          .container2 .form-group button:active{
+            color: darkblue;
+          }
+
+          .container3 .form-group button:active{
+            color: darkblue;
+          }
+
+          .container5 .form-group button:active{
+            color: darkblue;
+          }
+
+          .container7 .form-group button:active{
+            color: darkblue;
+          }
+
+          .sidebar a:hover{
+            background-color: #000000;
+          }
+
+          .student-item {
+                color: white;
+          }
+
+          .faculty-item {
+            color: white;
+          }
+
+          
+        footer {
+            background-color: #000000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><u>Hogwarts School & College</u></h1>
+    </div>
+    <header class="navbar">
+        <div class="navbar-logo">College Website</div>
+        <nav>
+          <ul class="navbar-links">
+            <li><a href="#"id="home1">Home</a></li>
+            <li><a href="#" id="addStudentBtn1">Add Student</a></li>
+            <li><a href="#" id="removeStudentBtn1">Remove Student</a></li>
+            <li><a href="#" id="addFacultyBtn1">Add Faculty</a></li>
+            <li><a href="#"id="removeFacultyBtn1">Remove Faculty</a></li>
+            <li><a href="/" class="logout"><i style="font-size:20px" class="fa">&#xf08b;Logout</i></a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="admindash">
+        <h2><marquee width="100%" behavior="alternate" scrollamount="12"><i style="font-size:24px" class="fa">&#xf007;</i> Admin Dashboard</marquee></h2>
+    </div>
+    
+    <div class="sidebar">
+        <a herf="#" id="home"><i style="font-size:24px" class="fa">&#xf015;</i> Home</a>
+        <a href="#" id="addStudentBtn">1. <i style="font-size:18px" class="fa">&#xf234;</i> Add Student</a>
+        <a href="#" id="addFacultyBtn">2. <i style="font-size:18px" class="fa">&#xf234;</i> Add Faculty</a>
+        <a href="#" id="removeStudentBtn">3. <i style="font-size:18px" class="fa">&#xf235;</i> Remove Student</a>
+        <a href="#" id="removeFacultyBtn">4. <i style="font-size:18px" class="fa">&#xf235;</i> Remove Faculty</a>
+        <a href="#" id="managesBtn">5. <i style="font-size:18px" class="fa">&#xf0c0;</i> Manage Students</a>
+        <a href="#" id="managefBtn">6. <i style="font-size:18px" class="fa">&#xf0c0;</i> Manage Faculty</a>
+    </div>
+    <div class="main">
+        <div class="container1">
+            <h2>Add New Student</h2>
+            <form id="addStudentForm">
+                <div class="form-group">
+                    <label for="stid">ID:</label>
+                    <input type="text" id="stid" name="stid" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentName">Name:</label>
+                    <input type="text" id="studentName" name="studentName" maxlength="20" required>
+                </div>
+                <div class="form-group">
+                    <label for="FatherName">Father Name:</label>
+                    <input type="text" id="FatherName" name="FatherName" maxlength="20" required>
+                </div>
+                <div class="form-group">
+                    <label for="num">Mobile Number:</label>
+                    <input type="text" id="num" name="num" maxlength="10" required>
+                </div>
+                <div class="form-group">
+                    <label for="Dept">Department:</label>
+                    <input type="text" id="Dept" name="Dept" maxlength="20" required>
+                </div>
+                <div class="form-group">
+                    <label for="Year">Year:</label>
+                    <input type="text" id="Year" name="Year" required>
+                </div>
+                <div class="form-group">
+                    <label for="pas">Password:</label>
+                    <input type="text" id="pas" name="pas" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Add Student</button>
+                </div>
+            </form>
+            <div class="notification" id="addStudentNotification"></div>
+        </div>
+
+        <div class="container5">
+            <h2>Add New Faculty</h2>
+            <form id="addFacultyForm">
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input type="text" id="id" name="id" required>
+                </div>
+                <div class="form-group">
+                    <label for="facultyName">Name:</label>
+                    <input type="text" id="facultyName" name="facultyName" maxlength="20" required>
+                </div>
+                <div class="form-group">
+                    <label for="FatherName">Father Name:</label>
+                    <input type="text" id="FatherName" name="FatherName" maxlength="20" required>
+                </div>
+                <div class="form-group">
+                    <label for="num">Mobile Number:</label>
+                    <input type="text" id="num" name="num" maxlength="10" required>
+                </div>
+                <div class="form-group">
+                    <label for="Dept">Department:</label>
+                    <input type="text" id="Dept" name="Dept" maxlength="20" required>
+                </div>
+                <div class="form-group">
+                    <label for="salary">Salary:</label>
+                    <input type="text" id="salary" name="salary" maxlength="10" required>
+                </div>
+                <div class="form-group">
+                    <label for="pas">Password:</label>
+                    <input type="text" id="pas" name="pas" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Add Faculty</button>
+                </div>
+            </form>
+            <div class="notification" id="addFacultyNotification"></div>
+        </div>
+
+        <div class="container2">
+            <h2>Remove Student</h2>
+            <form id="removeStudentForm">
+                <div class="form-group">
+                    <label for="stid">ID:</label>
+                    <input type="text" id="stid" name="stid" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Remove Student</button>
+                </div>
+            </form>
+            <div class="notification" id="removeStudentNotification"></div>
+        </div>
+
+        <div class="container3">
+            <h2>Remove Faculty</h2>
+            <form id="removeFacultyForm">
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input type="text" id="id" name="id" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Remove Faculty</button>
+                </div>
+            </form>
+            <div class="notification" id="removeFacultyNotification"></div>
+        </div>
+
+        <!-- Display existing students and faculty here -->
+        <div class="container" id="managesContainer">
+            <h2>Manage Students</h2>
+            <div class="form-group">
+                <button id="displayStudentsButton">Display Students</button>
+            </div>
+            <div id="studentList"></div>
+        </div>
+
+        <div class="container7" id="managefContainer">
+            <h2>Manage Faculty</h2>
+            <div class="form-group">
+                <button id="displayFacultyButton">Display Faculty</button>
+            </div>
+            <div id="facultyList"></div>
+        </div>
+
+        <div class="Home">
+            <h2>Welcome to Hogwarts School & College Website!!!</h2>
+            <form id="home">
+                <div class="form-group"></div>
+                </div>
+            </form>
+            <div class="notification" id="removeFacultyNotification"></div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2024 Hogwarts School & College. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Add any necessary JavaScript code, such as AJAX requests -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function showNotification(notificationId, message, isSuccess) {
+                const notification = $(notificationId);
+                notification.text(message);
+                notification.removeClass('success error');
+                notification.addClass(isSuccess ? 'success' : 'error');
+                notification.show();
+                setTimeout(() => notification.hide(), 3000);
+            }
+
+            function clearForm(formId) {
+                $(formId).trigger("reset");
+            }
+
+            $('#addStudentForm').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.post('/admin/addStudent', formData, function(response) {
+                    clearForm('#addStudentForm');
+                    showNotification('#addStudentNotification', 'Student added successfully!', true);
+                }).fail(function(xhr) {
+                    showNotification('#addStudentNotification', 'Error adding student: ' + xhr.responseText, false);
+                });
+            });
+
+            $('#addFacultyForm').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.post('/admin/addFaculty', formData, function(response) {
+                    clearForm('#addFacultyForm');
+                    showNotification('#addFacultyNotification', 'Faculty added successfully!', true);
+                }).fail(function(xhr) {
+                    showNotification('#addFacultyNotification', 'Error adding faculty: ' + xhr.responseText, false);
+                });
+            });
+
+            $('#removeStudentForm').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.post('/admin/removeStudent', formData, function(response) {
+                    clearForm('#removeStudentForm');
+                    showNotification('#removeStudentNotification', 'Student removed successfully!', true);
+                }).fail(function(xhr) {
+                    showNotification('#removeStudentNotification', 'Error removing student: ' + xhr.responseText, false);
+                });
+            });
+
+            $('#removeFacultyForm').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.post('/admin/removeFaculty', formData, function(response) {
+                    clearForm('#removeFacultyForm');
+                    showNotification('#removeFacultyNotification', 'Faculty removed successfully!', true);
+                }).fail(function(xhr) {
+                    showNotification('#removeFacultyNotification', 'Error removing faculty: ' + xhr.responseText, false);
+                });
+            });
+
+            function loadStudents() {
+                $.get('/admin/students', function(data) {
+                    let studentHtml = '';
+                    data.forEach(student => {
+                        studentHtml += `
+                            <div class="student-item">
+                                <p>ID: ${student.ID}</p>
+                                <p>Name: ${student.Name}</p>
+                                <p>Father Name: ${student.Father_Name}</p>
+                                <p>Mobile Number: ${student.Mobile_Number}</p>
+                                <p>Department: ${student.Department}</p>
+                                <p>Year: ${student.Year}</p>
+                                <p>Password: ${student.Password}</p>
+                            </div>
+                            <hr>`;
+                    });
+                    $('#studentList').html(studentHtml);
+                });
+            }
+
+            function loadFaculty() {
+                $.get('/admin/faculty', function(data) {
+                    let facultyHtml = '';
+                    data.forEach(faculty => {
+                        facultyHtml += `
+                            <div class="faculty-item">
+                                <p>ID: ${faculty.ID}</p>
+                                <p>Name: ${faculty.Name}</p>
+                                <p>Father Name: ${faculty.Father_Name}</p>
+                                <p>Mobile Number: ${faculty.Mobile_Number}</p>
+                                <p>Department: ${faculty.Department}</p>
+                                <p>Salary: ${faculty.Salary}</p>
+                                <p>Password: ${faculty.Password}</p>
+                            </div>
+                            <hr>`;
+                    });
+                    $('#facultyList').html(facultyHtml);
+                });
+            }
+
+            // Sidebar navigation
+            $('#addStudentBtn').click(function() {
+                $('.container, .container1, .container2, .container3,.container5,.container7, .Home').hide();
+                $('.container1').show();
+            });
+
+            $('#addFacultyBtn').click(function() {
+                $('.container, .container1, .container2, .container3,.container7, .Home').hide();
+                $('.container5').show();
+            });
+
+            $('#removeStudentBtn').click(function() {
+                $('.container, .container1, .container2, .container3, .container5,.container7, .Home').hide();
+                $('.container2').show();
+            });
+
+            $('#removeFacultyBtn').click(function() {
+                $('.container, .container1, .container2, .container3, .container5,.container7, .Home').hide();
+                $('.container3').show();
+            });
+
+            $('#managesBtn').click(function() {
+                $('.container, .container1, .container2, .container3, .container5,.container7, .Home').hide();
+                $('#managesContainer').show();
+            });
+            $('#managefBtn').click(function() {
+                $('.container, .container1, .container2, .container3, .container5, .container7, .Home').hide();
+                $('#managefContainer').show();
+            });
+            $('#home').click(function() {
+                $('.container, .container1, .container2, .container3, .container5, .container7').hide();
+                $('.Home').show();
+            });
+
+            // Horizontal Sidebar navigation
+            $('#addStudentBtn1').click(function() {
+                $('.container, .container1, .container2, .container3,.container5,.container7, .Home').hide();
+                $('.container1').show();
+            });
+
+            $('#addFacultyBtn1').click(function() {
+                $('.container, .container1, .container2, .container3,.container7, .Home').hide();
+                $('.container5').show();
+            });
+
+            $('#removeStudentBtn1').click(function() {
+                $('.container, .container1, .container2, .container3, .container5,.container7, .Home').hide();
+                $('.container2').show();
+            });
+
+            $('#removeFacultyBtn1').click(function() {
+                $('.container, .container1, .container2, .container3, .container5,.container7, .Home').hide();
+                $('.container3').show();
+            });
+
+            $('#home1').click(function() {
+                $('.container, .container1, .container2, .container3, .container5, .container7').hide();
+                $('.Home').show();
+            });
+
+            // Load students and faculty on button click
+            $('#displayStudentsButton').click(function() {
+                if ($('#studentList').is(':visible')) {
+                    $('#studentList').hide();
+                } else {
+                    loadStudents();
+                    $('#studentList').show();
+                }
+            });
+
+            $('#displayFacultyButton').click(function() {
+                if ($('#facultyList').is(':visible')) {
+                    $('#facultyList').hide();
+                } else {
+                    loadFaculty();
+                    $('#facultyList').show();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

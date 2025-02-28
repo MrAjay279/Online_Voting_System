@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #a8a8a8;
+        }
+        .header {
+            background-color: #f89040;
+            color: #ffffff;
+            padding: 25px;
+            font-style: normal;
+            text-align: center;
+            font-weight: bold;
+            font-size: larger;
+            text-shadow: 2px 2px #000;
+        }
+        .header h1 {
+            font-size: 4em;
+            font-family: "Times New Roman";
+            color: #000;
+            text-shadow: 2px 2px white;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 230px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #4e4e4e;
+            padding-top: 10px;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #ffffff;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        .main {
+            margin-left: 250px; 
+            padding: 20px;
+        }
+        .containermyinfo {
+            background-color: #fba8a8;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group button {
+            width: 50%;
+            padding: 10px;
+            height: 43px;
+            background-color: #64eda8;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: large;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            display: block;
+            margin: auto;
+        }
+        .form-group button:hover {
+            background-color: #18ffbe;
+        }
+        .navbar {
+            background-color: #000000;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            font-size: 18px;
+        }
+        .navbar-links li {
+            margin-right: 20px;
+        }
+        .navbar-links li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .navbar-links li a:hover {
+            color: #2386f0;
+        }
+
+        .container{
+            display: none; /* Hide all containers by default */
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        .container h2{
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 2%; 
+            background-color: #000000;
+            color: white;
+        }
+
+        footer {
+            background-color: #000000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><u>Online Voting Services</u></h1>
+        <div id="epicIdDisplay">
+            <i style="font-size: 24px;" class="fa fa-id-card"></i> <!-- Add Font Awesome icon -->
+            <span id="epicIdText"></span> <!-- Display the epic_id here -->
+        </div>
+        
+    </div>
+    <header class="navbar">
+        <div>Voting Services</div>
+        <nav>
+          <ul class="navbar-links">
+            <li><a href="#" class="nav-link" data-target="homeContainer">Home</a></li>
+            <li><a href="#" class="nav-link" data-target="myInfoContainer">My Info</a></li>
+            <li><a href="/auth/user/logout" class="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+          </ul>
+        </nav>
+    </header>
+    <div class="sidebar">
+        <a href="#" class="sidebar-link" data-target="homeContainer"><i style= "font-size:24px" class="fa fa-home"></i> Home</a>
+        <a href="#" class="sidebar-link" data-target="voteContainer"><i class="fa fa-check-circle"></i> Vote</a>
+        <a href="#" class="sidebar-link" data-target="myInfoContainer"><i class="fa fa-user"></i> My Info</a>
+    </div>
+    <div class="main">
+        <div class="container" id="homeContainer">
+            <h2>Welcome to Online Voting Services!</h2>
+            <p>Navigate through the dashboard to vote or check your info.</p>
+        </div>
+        <div class="container" id="voteContainer" style="display:none;">
+            <h2>Cast Your Vote</h2>
+    
+            <!-- Dropdown for constituency selection -->
+            <label for="constituency">Select Your Constituency:</label>
+            <select id="constituency">
+                <option value="">-- Please select constituency --</option>
+                <option value="Constituency A">Constituency 1</option>
+                <option value="Constituency B">Constituency 2</option>
+                <option value="Constituency C">Constituency 3</option>
+                <!-- Add more options dynamically or statically -->
+            </select>
+    
+            <button id="voteButton">Vote Now</button> <!-- Vote Now button -->
+            
+            <div id="candidatesDisplay" style="display:none;">
+                <h3>Select a Candidate</h3>
+                <form id="voteForm">
+                    <!-- Candidates will be dynamically populated here -->
+                </form>
+                <button id="submitVoteButton" style="display:none;">Submit Vote</button>
+            </div>
+        </div>
+        <div class="container" id="myInfoContainer" style="display:none;">
+            <h2>My Info</h2>
+            <div class="form-group">
+                <button id="toggleInfoButton">Show</button>
+            </div>
+            <div id="infoDisplay" style="display:none;"></div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Online Voting Services. All rights reserved.</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Fetch user info (epic_id) from the backend session
+            $.get('/user/getInfo', function(data) {
+                $('#epicIdText').text('Logged in as : ' + data.name); 
+            });
+
+
+            $('#homeContainer').show();
+        
+            // View My Info button clicked
+            $('#toggleInfoButton').click(function() {
+                $('#infoDisplay').toggle(); // Toggle the visibility of user info
+                if ($('#infoDisplay').is(':visible')) {
+                    // Fetch and display user info when the section is shown
+                    $.get('/user/myInfo', function(data) {
+                        // Display user info in the #infoDisplay section
+                        let userInfoHtml = `
+                            <h3>User Information</h3>
+                            <p><strong>Epic ID           :</strong> ${data.epic_id}</p>
+                            <p><strong>Name              :</strong> ${data.name}</p>
+                            <p><strong>Date of Birth     :</strong> ${data.dob}</p>
+                            <p><strong>Aadhaar Number    :</strong> ${data.aadhaar}</p>
+                            <p><strong>Constituency Name :</strong> ${data.constituency_name}</p>
+                            <p><strong>Status of Voting  :</strong> ${data.voted}</p>
+                            <p><strong>Password          :</strong> ${data.password}</p>
+                        `;
+                        $('#infoDisplay').html(userInfoHtml);
+                    }).fail(function() {
+                        $('#infoDisplay').html('<p>Error fetching user details.</p>');
+                    });
+                } else {
+                    // Hide the user info when toggled off
+                    $('#infoDisplay').html(''); // Clear the content when hidden
+                }
+            });
+
+            $('#voteButton').click(function () {
+                const constituency = $('#constituency').val(); // Get selected constituency
+                console.log('Selected constituency:', constituency);
+            
+                if (!constituency) {
+                    alert('Please select a constituency.');
+                    return;
+                }
+            
+                // Fetch candidates for the selected constituency
+                $.get(`/user/candidates/${constituency}`, function (candidates) {
+                    console.log('Candidates fetched:', candidates);
+            
+                    if (candidates.length > 0) {
+                        let candidatesHtml = '';
+                        candidates.forEach(function (candidate) {
+                            candidatesHtml += `
+                                <div>
+                                    <input type="radio" name="candidate" value="${candidate.candidate_name}">
+                                    <label>${candidate.candidate_name} (${candidate.party})</label>
+                                </div>
+                            `;
+                        });
+            
+                        $('#voteForm').html(candidatesHtml); // Populate candidates
+                        $('#candidatesDisplay').show(); // Show candidates section
+                        $('#submitVoteButton').show(); // Show submit button
+                    } else {
+                        $('#candidatesDisplay').html('<p>No candidates available.</p>').show();
+                    }
+                }).fail(function (xhr, status, error) {
+                    console.error('Error fetching candidates:', status, error);
+                    $('#candidatesDisplay').html('<p>Error fetching candidates.</p>').show();
+                });
+            });
+            
+            $('#submitVoteButton').click(function () {
+                const selectedCandidate = $('input[name="candidate"]:checked').val(); // Get selected candidate
+            
+                if (!selectedCandidate) {
+                    alert('Please select a candidate.');
+                    return;
+                }
+            
+                // Submit vote
+                $.post('/vote', { candidate_name: selectedCandidate }, function (response) {
+                    alert(response);
+                }).fail(function (xhr, status, error) {
+                    console.error('Error submitting vote:', status, error);
+                    alert('Error submitting vote.');
+                });
+            });
+            // Navigation using containers
+            $('.nav-link').click(function() {
+                var targetContainer = $(this).data('target');
+                $('.container').hide(); // Hide all containers
+                $('#' + targetContainer).show(); // Show the selected container
+            });
+        
+            // Sidebar navigation using containers
+            $('.sidebar-link').click(function() {
+                var targetContainer = $(this).data('target');
+                $('.container').hide(); // Hide all containers
+                $('#' + targetContainer).show(); // Show the selected container
+            });
+        });        
+    </script>
+</body>
+</html>

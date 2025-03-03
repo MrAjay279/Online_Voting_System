@@ -13,7 +13,7 @@
             background-color: #a8a8a8;
         }
         .header {
-            background-color: #f89040;
+            background: url('voting.jpg');
             color: #ffffff;
             padding: 25px;
             font-style: normal;
@@ -121,6 +121,9 @@
             background-color: #000000;
             color: white;
         }
+        .epicIdText{
+            color: #000;
+        }
 
         footer {
             background-color: #000000;
@@ -172,9 +175,9 @@
             <label for="constituency">Select Your Constituency:</label>
             <select id="constituency">
                 <option value="">-- Please select constituency --</option>
-                <option value="Constituency A">Constituency 1</option>
-                <option value="Constituency B">Constituency 2</option>
-                <option value="Constituency C">Constituency 3</option>
+                <option value="Constituency A">Constituency A</option>
+                <option value="Constituency B">Constituency B</option>
+                <option value="Constituency C">Constituency C</option>
                 <!-- Add more options dynamically or statically -->
             </select>
     
@@ -274,19 +277,20 @@
             });
             
             $('#submitVoteButton').click(function () {
-                const selectedCandidate = $('input[name="candidate"]:checked').val(); // Get selected candidate
+                const selectedCandidate = $('input[name="candidate"]:checked').val();
             
                 if (!selectedCandidate) {
                     alert('Please select a candidate.');
                     return;
                 }
+                console.log('Submitting vote for:', selectedCandidate);
             
-                // Submit vote
-                $.post('/vote', { candidate_name: selectedCandidate }, function (response) {
+                $.post('/user/vote', { candidate_name: selectedCandidate }, function (response) {
+                    console.log('Vote submitted successfully:', response);
                     alert(response);
                 }).fail(function (xhr, status, error) {
-                    console.error('Error submitting vote:', status, error);
-                    alert('Error submitting vote.');
+                    console.log('Error submitting vote:');
+                    alert('Error submitting vote. Check console for details.');
                 });
             });
             // Navigation using containers

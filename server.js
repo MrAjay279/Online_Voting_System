@@ -303,44 +303,41 @@ app.get('/user/candidates/:constituency_name', (req, res) => {
 
 // Handle vote submission
 app.post('/user/vote', async (req, res) => {
-    const epicId = req.session.user ? req.session.user.epic_id : null; // Ensure epic_id exists in session
-    if (!epicId) {
-        return res.status(401).send('Unauthorized');
-    }
-    const selectedCandidate = req.body.candidate_name;
-
-    // Check if user has already voted
     try {
-        // Check if the user has already voted
-        const [userResults] = await db.promise().query(
-            'SELECT voted, constituency_name FROM users WHERE epic_id = ?', [epicId]
-        );
+        console.log('Session user:', req.session.user);
 
-        if (userResults.length === 0) {
-            return res.status(404).send('User not found');
+        const user = req.session.user;
+        if (!user || !user.epic_id) {
+            return res.status(401).send('Unauthorized');
         }
 
-        const { voted, constituency_name } = userResults[0];
+        const epicId = user.epic_id;
+        const con_name = user.constituency_name;
+        const votestatus = user.voted;
 
-        if (voted) {
+        const selectedCandidate = req.body.candidate_name;
+        if (!selectedCandidate) {
+            return res.status(400).send('Candidate name is required');
+        }
+
+        console.log(`User Epic ID: ${epicId}, Constituency: ${con_name}, Vote Status: ${votestatus}`);
+        console.log(`Selected Candidate: ${selectedCandidate}`);
+
+        if (votestatus === 1) {
             return res.status(400).send('You have already voted');
         }
 
         // Update vote count
-        await db.promise().query(
-            'UPDATE results SET votes = votes + 1 WHERE constituency_name = ? AND candidate_name = ?', 
-            [constituency_name, selectedCandidate]
-        );
+        const updateVoteQuery = 'UPDATE results SET votes = votes + 1 WHERE constituency_name = ? AND candidate_name = ?';
+        const markUserVotedQuery = 'UPDATE users SET voted = 1 WHERE epic_id = ?';
 
-        // Mark user as voted
-        await db.promise().query(
-            'UPDATE users SET voted = 1 WHERE epic_id = ?', [epicId]
-        );
+        await db.query(updateVoteQuery, [con_name, selectedCandidate]);
+        await db.query(markUserVotedQuery, [epicId]);
 
         res.send('Vote submitted successfully');
     } catch (err) {
         console.error("Error during vote submission:", err);
-        res.status(500).send('Error submitting vote');
+        res.status(500).send('Internal Server Error');
     }
 });
 
